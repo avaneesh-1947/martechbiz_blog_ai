@@ -366,61 +366,304 @@ const BlogClient = ({ slug }) => {
         />
       </Head>
       
-      {/* Hero Section */}
-      <div className='relative bg-[#00CC91] py-20 px-5 md:px-12 lg:px-28 overflow-hidden'>
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-            backgroundSize: '24px 24px'
-          }}></div>
+      {/* Enhanced Hero Section */}
+      <div className='relative bg-gradient-to-br from-[#2a9d8f] via-[#264653] to-[#1a4d3a] py-24 px-5 md:px-12 lg:px-28 overflow-hidden'>
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          {/* Animated Grid Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <motion.div 
+              className="absolute inset-0" 
+              style={{
+                backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+                backgroundSize: '32px 32px'
+              }}
+              animate={{
+                backgroundPosition: ['0px 0px', '32px 32px'],
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+          </div>
+          
+          {/* Floating Geometric Shapes */}
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              className={`absolute ${i % 2 === 0 ? 'w-3 h-3 bg-yellow-300/20 rounded-full' : 'w-2 h-2 bg-white/15 rotate-45'}`}
+              initial={{ 
+                x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200), 
+                y: Math.random() * 600 + 100,
+                scale: 0,
+                rotate: 0
+              }}
+              animate={{ 
+                y: [null, -150],
+                scale: [0, 1, 0.5, 0],
+                rotate: [0, 360],
+                opacity: [0, 0.8, 0.4, 0]
+              }}
+              transition={{
+                duration: 6 + Math.random() * 4,
+                repeat: Infinity,
+                delay: Math.random() * 5,
+                ease: "easeOut"
+              }}
+            />
+          ))}
+          
+          {/* Animated Wave Pattern */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 opacity-20">
+            <svg className="w-full h-full" viewBox="0 0 1200 120" preserveAspectRatio="none">
+              <motion.path
+                d="M0,60 C300,20 600,100 900,60 C1050,40 1150,80 1200,60 L1200,120 L0,120 Z"
+                fill="rgba(255,255,255,0.1)"
+                animate={{
+                  d: [
+                    "M0,60 C300,20 600,100 900,60 C1050,40 1150,80 1200,60 L1200,120 L0,120 Z",
+                    "M0,80 C300,40 600,120 900,80 C1050,60 1150,100 1200,80 L1200,120 L0,120 Z",
+                    "M0,60 C300,20 600,100 900,60 C1050,40 1150,80 1200,60 L1200,120 L0,120 Z"
+                  ]
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+            </svg>
+          </div>
+          
+          {/* Glowing Orbs */}
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={`orb-${i}`}
+              className="absolute rounded-full bg-gradient-to-r from-yellow-300/10 to-white/5 blur-xl"
+              style={{
+                width: `${120 + i * 40}px`,
+                height: `${120 + i * 40}px`,
+                left: `${20 + i * 30}%`,
+                top: `${10 + i * 20}%`,
+              }}
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.6, 0.3],
+                x: [0, 30, 0],
+                y: [0, -20, 0],
+              }}
+              transition={{
+                duration: 8 + i * 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 2
+              }}
+            />
+          ))}
         </div>
         
         <div className='relative z-10'>
-          <div className='text-center my-20 max-w-4xl mx-auto'>
+          <div className='text-center my-20 max-w-5xl mx-auto'>
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className='inline-block bg-[#EEC764] backdrop-blur-sm border border-gray-600 rounded-full px-4 py-2 mb-6'
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, type: "spring", stiffness: 120, damping: 10 }}
+              className='inline-flex items-center gap-3 bg-gradient-to-r from-yellow-300/95 to-yellow-200/95 backdrop-blur-md border border-yellow-200/60 rounded-full px-8 py-4 mb-10 shadow-2xl hover:shadow-yellow-300/20 transition-all duration-500 group'
+              whileHover={{ scale: 1.05, y: -2 }}
             >
-              <span className='text-[#008000] text-sm font-medium'>{data.subcategory || data.category}</span>
+              <motion.div 
+                className="w-3 h-3 bg-[#2a9d8f] rounded-full"
+                animate={{
+                  scale: [1, 1.3, 1],
+                  opacity: [0.7, 1, 0.7]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              <span className='text-[#264653] text-base font-bold tracking-wide group-hover:tracking-wider transition-all duration-300'>
+                {data.subcategory || data.category}
+              </span>
+              <motion.div
+                className="w-1 h-1 bg-[#2a9d8f] rounded-full ml-1"
+                animate={{
+                  x: [0, 4, 0],
+                  opacity: [0, 1, 0]
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5
+                }}
+              />
             </motion.div>
             
             <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className='text-4xl md:text-6xl font-bold max-w-[900px] mx-auto leading-tight text-white mb-8 tracking-tight'
+              transition={{ duration: 1, delay: 0.3, type: "spring", stiffness: 60 }}
+              className='text-4xl md:text-6xl lg:text-7xl font-bold max-w-[1000px] mx-auto leading-tight mb-12 tracking-tight'
             >
-              {data.title}
+              <motion.span 
+                className="bg-gradient-to-r from-white via-yellow-100 to-white bg-clip-text text-transparent inline-block"
+                initial={{ backgroundSize: "100% 100%" }}
+                animate={{ 
+                  backgroundSize: ["100% 100%", "150% 100%", "100% 100%"],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                {data.title}
+              </motion.span>
             </motion.h1>
             
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className='flex flex-col md:flex-row items-center justify-center gap-6 text-[#E5F2EF]'
+              transition={{ duration: 0.8, delay: 0.6, type: "spring", stiffness: 80 }}
+              className='flex flex-col md:flex-row items-center justify-center gap-12 text-gray-100'
             >
-              <div className='flex items-center gap-3'>
-                <div className='w-10 h-10 bg-[#EEC764] rounded-full flex items-center justify-center text-[#008000] font-semibold'>
+              <motion.div 
+                className='flex items-center gap-5 group cursor-pointer'
+                whileHover={{ scale: 1.08, y: -3 }}
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ 
+                  default: { delay: 0.8, duration: 0.6 },
+                  hover: { duration: 0.3, type: "spring", stiffness: 200 }
+                }}
+              >
+                <motion.div 
+                  className='relative w-14 h-14 bg-gradient-to-r from-yellow-300 to-yellow-400 rounded-full flex items-center justify-center text-[#264653] font-bold text-xl shadow-2xl'
+                  whileHover={{ rotate: 5 }}
+                  animate={{
+                    boxShadow: [
+                      "0 10px 25px rgba(255, 193, 7, 0.3)",
+                      "0 15px 35px rgba(255, 193, 7, 0.5)",
+                      "0 10px 25px rgba(255, 193, 7, 0.3)"
+                    ]
+                  }}
+                  transition={{
+                    boxShadow: {
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }
+                  }}
+                >
                   {data.author?.charAt(0) || 'A'}
+                  <motion.div
+                    className="absolute -inset-1 bg-gradient-to-r from-yellow-300/50 to-yellow-400/50 rounded-full blur-sm"
+                    animate={{
+                      scale: [1, 1.1, 1],
+                      opacity: [0.5, 0.8, 0.5]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                </motion.div>
+                <div className="text-left">
+                  <motion.div 
+                    className='text-xl font-bold group-hover:text-yellow-200 transition-colors duration-300'
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1, duration: 0.5 }}
+                  >
+                    By {data.author}
+                  </motion.div>
+                  <motion.div 
+                    className='text-sm text-gray-300 group-hover:text-gray-200 transition-colors duration-300'
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.1, duration: 0.5 }}
+                  >
+                    Author
+                  </motion.div>
                 </div>
-                <span className='text-lg font-medium'>By {data.author}</span>
-              </div>
+              </motion.div>
               
-              <div className='flex items-center gap-2 text-[#E5F2EF]'>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span className='text-lg'>
-                  {new Date(data.createdAt || data.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </span>
-              </div>
+              <motion.div 
+                className="hidden md:block w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent"
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ delay: 1.2, duration: 0.5 }}
+              />
+              
+              <motion.div 
+                className='flex items-center gap-5 group cursor-pointer'
+                whileHover={{ scale: 1.08, y: -3 }}
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ 
+                  default: { delay: 0.9, duration: 0.6 },
+                  hover: { duration: 0.3, type: "spring", stiffness: 200 }
+                }}
+              >
+                <motion.div 
+                  className="relative p-3 bg-white/15 rounded-full backdrop-blur-md shadow-xl group-hover:bg-white/25 transition-all duration-300"
+                  whileHover={{ rotate: -5 }}
+                  animate={{
+                    scale: [1, 1.05, 1]
+                  }}
+                  transition={{
+                    scale: {
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }
+                  }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <motion.div
+                    className="absolute -inset-1 bg-white/10 rounded-full blur-sm"
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      opacity: [0.3, 0.6, 0.3]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1
+                    }}
+                  />
+                </motion.div>
+                <div className="text-left">
+                  <motion.div 
+                    className='text-xl font-bold group-hover:text-yellow-200 transition-colors duration-300'
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.1, duration: 0.5 }}
+                  >
+                    {new Date(data.createdAt || data.date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </motion.div>
+                  <motion.div 
+                    className='text-sm text-gray-300 group-hover:text-gray-200 transition-colors duration-300'
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.2, duration: 0.5 }}
+                  >
+                    Published
+                  </motion.div>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -915,7 +1158,7 @@ const BlogClient = ({ slug }) => {
             className="p-8 md:p-12 my-16"
           >
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-8 h-8 bg-[#00d78c] rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 bg-[#2a9d8f] rounded-full flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
@@ -927,7 +1170,7 @@ const BlogClient = ({ slug }) => {
               {comments.map((c) => (
                 <div key={c._id} className="bg-gradient-to-r from-white to-[#F7F7D0]/30 p-6 rounded-xl border border-[#E8F1EF] hover:shadow-md transition-all duration-300">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-gradient-to-r from-[#386861] to-[#294944] rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
+                    <div className="w-10 h-10 bg-gradient-to-r from-[#2a9d8f] to-[#264653] rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
                       {c.name.charAt(0).toUpperCase()}
                     </div>
                     <div className="flex-1">
@@ -952,13 +1195,13 @@ const BlogClient = ({ slug }) => {
             </div>
             
             {/* Comment Form */}
-            <div className="bg-gradient-to-br from-teal-50 to-emerald-50 p-8 rounded-2xl border border-green-100">
+            <div className="bg-gradient-to-br from-[#2a9d8f]/5 to-[#264653]/5 p-8 rounded-2xl border border-[#2a9d8f]/20">
               <h3 className="text-xl font-semibold mb-6 text-gray-900">Join the conversation</h3>
               <form onSubmit={addComment} className="space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-[#294944] mb-2">Your Name</label>
+                  <label className="block text-sm font-medium text-[#264653] mb-2">Your Name</label>
                   <input
-                    className="w-full border-2 border-[#E8F1EF] px-4 py-3 rounded-xl focus:border-[#386861] focus:ring-4 focus:ring-[#386861]/15 transition-all duration-300 text-gray-900 placeholder-gray-400"
+                    className="w-full border-2 border-gray-200 px-4 py-3 rounded-xl focus:border-[#2a9d8f] focus:ring-4 focus:ring-[#2a9d8f]/15 transition-all duration-300 text-gray-900 placeholder-gray-400"
                     placeholder="Enter your name"
                     value={name}
                     onChange={e => setName(e.target.value)}
@@ -966,10 +1209,10 @@ const BlogClient = ({ slug }) => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#294944] mb-2">Your Comment</label>
+                  <label className="block text-sm font-medium text-[#264653] mb-2">Your Comment</label>
                   <textarea
                     rows={5}
-                    className="w-full border-2 border-[#E8F1EF] px-4 py-3 rounded-xl focus:border-[#386861] focus:ring-4 focus:ring-[#386861]/15 transition-all duration-300 text-gray-900 placeholder-gray-400 resize-none"
+                    className="w-full border-2 border-gray-200 px-4 py-3 rounded-xl focus:border-[#2a9d8f] focus:ring-4 focus:ring-[#2a9d8f]/15 transition-all duration-300 text-gray-900 placeholder-gray-400 resize-none"
                     placeholder="Share your thoughts..."
                     value={content}
                     onChange={e => setContent(e.target.value)}
@@ -979,7 +1222,7 @@ const BlogClient = ({ slug }) => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-[#00d78c] text-[#FFFFFF] px-8 py-3 rounded-xl hover:bg-[#1ee8ab] transition-all duration-300 font-medium disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg hover:shadow-xl"
+                  className="bg-[#2a9d8f] text-white px-8 py-3 rounded-xl hover:bg-[#264653] transition-all duration-300 font-medium disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg hover:shadow-xl"
                 >
                   {isSubmitting ? (
                     <>
@@ -1010,8 +1253,8 @@ const BlogClient = ({ slug }) => {
             className="p-8 md:p-12 my-16 relative overflow-hidden"
           >
             <div className="relative z-10 text-center max-w-2xl mx-auto">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-16 h-16 bg-[#2a9d8f] rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
@@ -1027,12 +1270,12 @@ const BlogClient = ({ slug }) => {
                   name="email"
                   placeholder='Enter your email address' 
                   required 
-                  className='flex-1 px-6 py-4 rounded-xl bg-white border border-gray-300 placeholder-gray-500 text-black outline-none focus:ring-4 focus:ring-blue-300 focus:border-blue-500 transition-all duration-300'
+                  className='flex-1 px-6 py-4 rounded-xl bg-white border border-gray-300 placeholder-gray-500 text-black outline-none focus:ring-4 focus:ring-[#2a9d8f]/20 focus:border-[#2a9d8f] transition-all duration-300'
                 />
                 <button 
                   type="submit" 
                   disabled={isSubscribing}
-                  className='bg-[#00d78c] text-white px-8 py-4 rounded-xl font-semibold hover:bg-[#1ee8ab] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 whitespace-nowrap'
+                  className='bg-[#2a9d8f] text-white px-8 py-4 rounded-xl font-semibold hover:bg-[#264653] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 whitespace-nowrap'
                 >
                   {isSubscribing ? (
                     <>
@@ -1074,7 +1317,7 @@ const BlogClient = ({ slug }) => {
             transition={{ duration: 0.8, delay: 1.4 }}
             className='p-8 my-16 text-center'
           >
-            <div className="w-12 h-12 bg-[#00d78c] rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-12 h-12 bg-[#2a9d8f] rounded-full flex items-center justify-center mx-auto mb-6">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
               </svg>
