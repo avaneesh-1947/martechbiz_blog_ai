@@ -268,15 +268,14 @@ const Navbar = () => {
   <div className="flex items-center justify-between h-22">
     {/* Logo - Fixed */}
     <div className="flex-shrink-0">
-      <Link href="/" className="flex items-center">
-        <Image
-          src="/images/logo3.png"
-          alt="Martechbiz"
-          width={520}
-          height={180}
-          className="h-35 w-auto max-w-[200px] sm:max-w-[250px] lg:max-w-[300px] mt-6"
-          priority
-        />
+      <Link href="/" className="flex items-center space-x-3">
+        <div className="bg-yellow-400 p-2 rounded-md">
+          <div className="w-6 h-6 bg-yellow-600 transform rotate-45 rounded-sm"></div>
+        </div>
+        <div className="flex flex-col">
+          <span className="text-xl font-bold text-white tracking-wide">MARTECHBIZ</span>
+          <span className="text-xs text-gray-300 tracking-wider">Marketing</span>
+        </div>
       </Link>
     </div>
 
@@ -453,15 +452,14 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-40 bg-white overflow-y-auto">
           <div className="flex items-center justify-between p-4 border-b border-gray-200">
-            <Link href="/" className="flex items-center" onClick={() => setIsMenuOpen(false)}>
-              <Image
-                src="/images/logo1.png"
-                alt="Martechbiz"
-                width={120}
-                height={40}
-                className="h-8 w-auto"
-                priority
-              />
+            <Link href="/" className="flex items-center space-x-2" onClick={() => setIsMenuOpen(false)}>
+              <div className="bg-yellow-400 p-1.5 rounded-md">
+                <div className="w-4 h-4 bg-yellow-600 transform rotate-45 rounded-sm"></div>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg font-bold text-[#1E2E2B] tracking-wide">MARTECHBIZ</span>
+                <span className="text-xs text-gray-600 tracking-wider">MADE EASY</span>
+              </div>
             </Link>
             <button
               onClick={toggleMobileMenu}
