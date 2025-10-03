@@ -15,10 +15,11 @@ const Page = () => {
   const [department, setDepartment] = useState('');
   const [subcategory, setSubcategory] = useState('');
   const departmentSubcategories = {
-    Marketing: ['ABM', 'Advertising', 'Content Creation', 'Demand Generation', 'Intent Data'],
+    Marketing: [ "Human Resources","Project Management",  "IT Management", "Business Intelligence", "Sales & CRM"],
     Tech: ['Staffing Solutions','Recruitment Services','Talent Acquisition','Workforce Solutions','Contract Staffing','Permanent Staffing','Temp-to-Hire','Outsourced Recruitment','Hiring Solutions','Executive Search'],
     Sales: ['Lead Generation', 'CRM', 'B2B', 'Inside Sales', 'Field Sales']
   };
+
   const router = useRouter();
   const { axios } = useAppContext();
   const editorRef = useRef(null);

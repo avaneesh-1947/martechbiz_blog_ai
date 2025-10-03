@@ -27,7 +27,7 @@ export async function generateMetadata({ params }) {
     console.log('API response data:', data);
 
     const blog = data.blog;
-    if (!blog || (blog.company && blog.company !== 'quoreit')) {
+    if (!blog || (blog.company && blog.company !== 'Martechbiz')) {
       console.log('No blog found for slug:', slug);
       return {
         title: 'Blog Not Found - AI Blog',

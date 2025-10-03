@@ -11,11 +11,9 @@ export default function Home() {
     <>
       <ToastContainer theme="dark"/>
       <NavbarNew/>
-      <div className="pt-20"> {/* Add padding-top equal to navbar height */}
-        <Header/>
-        <BlogList/>
-        <Footer/>
-      </div>
+      <Header/>
+      <BlogList/>
+      <Footer/>
     </>
   )
-} 
+}

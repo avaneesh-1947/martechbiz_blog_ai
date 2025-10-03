@@ -9,16 +9,15 @@ const Company = company;
 // Blog categories - matching addBlog subcategories
 const blogCategories = [
   "All",
-  "Staffing Solutions",
-  "Recruitment Services",
-  "Talent Acquisition",
-  "Workforce Solutions",
-  "Contract Staffing",
-  "Permanent Staffing",
-  "Temp-to-Hire",
-  "Outsourced Recruitment",
-  "Hiring Solutions",
-  "Executive Search"
+  "Human Resources",
+
+  "Project Management",
+  
+  "IT Management",
+  
+  "Business Intelligence",
+  
+  "Sales & CRM",
 ];
 
 const BlogCard = ({ blog, index }) => {
@@ -63,9 +62,9 @@ const BlogCard = ({ blog, index }) => {
       className="cursor-pointer"
       onClick={handleClick}
     >
-      <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+      <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col h-full border border-gray-100 hover:border-[#40e0d0]/30">
         {/* Image */}
-        <div className="relative h-61 overflow-hidden">
+        <div className="relative h-48 overflow-hidden rounded-t-3xl">
           <motion.img
             src={image || "/default-blog.jpg"}
             alt={title || "Blog"}
@@ -82,8 +81,8 @@ const BlogCard = ({ blog, index }) => {
 
           {/* Category Badge */}
           {(subcategory || category) && (
-            <div className="absolute top-3 left-3">
-              <span className="bg-white/90 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+            <div className="absolute top-4 left-4">
+              <span className="bg-gradient-to-r from-[#40e0d0] to-[#20b2aa] text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
                 {subcategory || category}
               </span>
             </div>
@@ -101,33 +100,40 @@ const BlogCard = ({ blog, index }) => {
         <div className="flex-1 p-6 flex flex-col">
           {/* Title */}
           <h3
-            className={`text-base font-semibold leading-snug mb-3 transition-colors duration-300 ${
-              isHovered ? "text-green-600" : "text-gray-900"
+            className={`text-lg font-bold leading-tight mb-4 transition-colors duration-300 ${
+              isHovered ? "text-[#40e0d0]" : "text-gray-900"
             }`}
           >
-            {title?.length > 90 ? `${title.slice(0, 90)}...` : title}
+            {title?.length > 80 ? `${title.slice(0, 80)}...` : title}
           </h3>
+
+          {/* Description */}
+          {description && (
+            <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-1">
+              {description.length > 100 ? `${description.slice(0, 100)}...` : description}
+            </p>
+          )}
 
           {/* Button */}
           <div className="mt-auto">
             <motion.button
-              className="flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="w-full flex items-center justify-center bg-gradient-to-r from-[#40e0d0] to-[#20b2aa] hover:from-[#7fffd4] hover:to-[#40e0d0] text-white font-bold px-6 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
             >
-              READ MORE
+              READ ARTICLE
               <motion.svg
-                className="w-4 h-4 ml-2"
+                className="w-5 h-5 ml-2"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                animate={{ x: isHovered ? 4 : 0 }}
+                animate={{ x: isHovered ? 6 : 0 }}
                 transition={{ duration: 0.3 }}
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={2}
+                  strokeWidth={2.5}
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </motion.svg>
@@ -149,10 +155,10 @@ const FilterButton = ({ category, isActive, onClick, index }) => (
     whileHover={{ scale: 1.05, y: -2 }}
     whileTap={{ scale: 0.95 }}
     onClick={onClick}
-    className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 relative overflow-hidden ${
+    className={`px-8 py-4 rounded-2xl font-bold transition-all duration-300 relative overflow-hidden ${
       isActive
-        ? "bg-[#00D7A4] text-white shadow-lg"
-        : "bg-white text-[#294944] hover:bg-[#00D7A4]/20 border border-gray-200"
+        ? "bg-gradient-to-r from-[#40e0d0] to-[#20b2aa] text-white shadow-xl"
+        : "bg-white text-gray-700 hover:bg-[#40e0d0]/10 border border-gray-200 hover:border-[#40e0d0]/50 shadow-md hover:shadow-lg"
     }`}
   >
     <motion.span
@@ -182,8 +188,8 @@ const SearchBar = ({ value, onChange }) => {
       whileFocus={{ scale: 1.02 }}
     >
       <motion.div
-        className={`relative bg-white rounded-2xl shadow-lg transition-all duration-300 ${
-          isFocused ? 'shadow-xl ring-2 ring-[#00D7A4]/50' : ''
+        className={`relative bg-white rounded-2xl shadow-lg border transition-all duration-300 ${
+          isFocused ? 'shadow-2xl ring-2 ring-[#40e0d0]/50 border-[#40e0d0]/50' : 'border-gray-200'
         }`}
         animate={{ 
           boxShadow: isFocused 
@@ -198,11 +204,11 @@ const SearchBar = ({ value, onChange }) => {
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          className="w-full px-6 py-4 pl-14 pr-12 text-[#294944] placeholder-gray-400 bg-transparent rounded-2xl focus:outline-none text-lg"
+          className="w-full px-6 py-4 pl-14 pr-12 text-gray-800 placeholder-gray-500 bg-transparent rounded-2xl focus:outline-none text-lg font-medium"
         />
         <motion.div 
           className="absolute left-5 top-1/2 transform -translate-y-1/2"
-          animate={{ scale: isFocused ? 1.1 : 1, color: isFocused ? '#00D7A4' : '#9CA3AF' }}
+          animate={{ scale: isFocused ? 1.1 : 1, color: isFocused ? '#40e0d0' : '#9CA3AF' }}
         >
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
@@ -300,7 +306,7 @@ const BlogList = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-[#F7D270]/5 to-[#386861]/10">
+    <div className="min-h-screen bg-gradient-to-br from-[#e8f5f3] via-[#f0f9f7] to-[#e0f2f1]">
       {/* Enhanced Hero Section */}
       <section className="relative bg-gradient-to-r from-[#e8f3f2] via-[#d9e8e6] to-[#e8f3f2] text-gray-800 py-15 overflow-hidden">
   {/* Animated elements */}
@@ -429,7 +435,7 @@ const BlogList = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
             >
               {getFilteredBlogs().length > 0 ? (
                 getFilteredBlogs().map((item, index) => (

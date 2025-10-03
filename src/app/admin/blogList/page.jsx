@@ -18,7 +18,7 @@ const ListBlog = () => {
       setLoading(true);
       const token = localStorage.getItem('token');
       const company = localStorage.getItem("company");
-      const { data } = await axios.get(`${baseURL}/api/admin/blogs?company=quoreit`, {
+      const { data } = await axios.get(`${baseURL}/api/admin/blogs?company=Martechbiz`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
