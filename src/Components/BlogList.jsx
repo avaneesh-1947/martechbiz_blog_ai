@@ -86,8 +86,16 @@ const BlogCard = ({ blog, index }) => {
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
               <div className="text-center">
-                <svg className="w-12 h-12 mx-auto text-gray-400 mb-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                <svg
+                  className="w-12 h-12 mx-auto text-gray-400 mb-2"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <p className="text-xs text-gray-500">Image not available</p>
               </div>
@@ -96,7 +104,7 @@ const BlogCard = ({ blog, index }) => {
 
           {/* Category Badge */}
           {(subcategory || category) && (
-            <motion.div 
+            <motion.div
               className="absolute top-4 left-4"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -109,7 +117,7 @@ const BlogCard = ({ blog, index }) => {
           )}
 
           {/* Date Badge */}
-          <motion.div 
+          <motion.div
             className="absolute bottom-3 right-3"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -126,7 +134,9 @@ const BlogCard = ({ blog, index }) => {
           {/* Title */}
           <motion.h3
             className={`text-xl font-bold leading-tight mb-4 transition-all duration-300 ${
-              isHovered ? "text-[#2a9d8f] transform translate-y-[-1px]" : "text-gray-900"
+              isHovered
+                ? "text-[#2a9d8f] transform translate-y-[-1px]"
+                : "text-gray-900"
             }`}
             whileHover={{ y: -1 }}
           >
@@ -136,16 +146,32 @@ const BlogCard = ({ blog, index }) => {
           {/* Description */}
           {description && (
             <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-1 line-clamp-3">
-              {description.length > 120 ? `${description.slice(0, 120)}...` : description}
+              {(() => {
+                const plainText = description.replace(/<[^>]+>/g, ""); // removes all HTML tags
+                return plainText.length > 120
+                  ? `${plainText.slice(0, 120)}...`
+                  : plainText;
+              })()}
             </p>
           )}
-          
+
           {/* Reading time estimate */}
           <div className="flex items-center gap-2 mb-4 text-xs text-gray-500">
-            <svg className="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+            <svg
+              className="w-4 h-4 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                clipRule="evenodd"
+              />
             </svg>
-            <span>{Math.max(1, Math.ceil((description?.length || 0) / 200))} min read</span>
+            <span>
+              {Math.max(1, Math.ceil((description?.length || 0) / 200))} min
+              read
+            </span>
           </div>
 
           {/* Button */}
@@ -176,7 +202,7 @@ const BlogCard = ({ blog, index }) => {
               {/* Button shine effect */}
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-200/15 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"
-                style={{ width: '100%' }}
+                style={{ width: "100%" }}
               />
             </motion.button>
           </div>

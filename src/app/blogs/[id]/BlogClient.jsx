@@ -679,23 +679,18 @@ const BlogClient = ({ slug }) => {
             className='relative'
           >
             {/* Updated Image with 16:9 aspect ratio */}
-            <div className="relative w-full bg-white rounded-2xl p-2 shadow-2xl">
-              <Image 
-                className='rounded-2xl w-full' 
-                src={data.image} 
-                width={1920} 
-                height={1080} 
-                alt={data.title}
-                style={{ 
-                  aspectRatio: '16/9', 
-                  objectFit: 'cover', 
-                  objectPosition: 'center',
-                  width: '100%',
-                  height: 'auto'
-                }}
-                priority
-              />
-            </div>
+           <div className="relative w-full bg-white rounded-2xl p-2 shadow-2xl">
+  <div className="relative w-full overflow-hidden rounded-xl bg-gray-50 aspect-video">
+    <Image 
+      className="object-cover"
+      src={data.image}
+      alt={data.title}
+      fill
+      priority
+    />
+  </div>
+</div>
+
           </motion.div>
           
           {/* Premium Blog Content Format */}
@@ -1409,7 +1404,7 @@ const BlogClient = ({ slug }) => {
                         {/* Category badge */}
                         <div className="absolute top-3 left-3">
                           <span className="bg-white/90 backdrop-blur-sm text-[#294944] text-xs font-semibold px-3 py-1 rounded-full border border-white/20 shadow-sm">
-                            {blog.category}
+                            {blog.subcategory|| blog.category }
                           </span>
                         </div>
                         
